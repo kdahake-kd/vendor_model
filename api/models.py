@@ -6,7 +6,7 @@ class Vendor(models.Model):
     name=models.CharField(max_length=255)
     contact_details=models.TextField()
     address=models.TextField()
-    Vendor_code=models.CharField(max_length=50,unique=True)
+    Vendor_code=models.CharField(max_length=256,unique=True)
     on_time_delivery_rate=models.FloatField(null=True,blank=True,default=0.0)
     quality_rating_avg=models.FloatField(null=True,blank=True,default=0.0)
     average_response_time=models.FloatField(null=True,blank=True,default=0.0)
