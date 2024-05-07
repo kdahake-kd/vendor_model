@@ -6,40 +6,27 @@ from rest_framework.request import Request
 from api import serializer,models
 import json
 from django.http import HttpResponse
-# Create your views here.
-
-class VendorAPIViewSet():
-    pass
-
-
-
-@api_view(['POST'])
-def createVendor(request):
-    body=json.loads(request.body)
-    print("body we got",body)
-    response=serializer.VendorSerializer(data=body)
-    print('no respone got',response)
-
-    if response.is_valid():
-        print("valid data")
-        inst=response.save()
-        print('inst save',inst)
-        response=serializer.VendorSerializer(inst)
-        return Response(response.data)
-    return Response(response.errors)
-
-@api_view()
-def VendorDetails(request):
-    data=models.Vendor.objects.all()
-    response=serializer.VendorSerializer(data,many=True)
-    return Response(response.data)
+from django.views.generic import CreateView
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework import viewsets
+from .models import *
+from api.serializer import *
+# Create your views here
 
 
-@api_view()
-def VendorDetailsid(request,pk):
-     vendor=get_list_or_404(models.Vendor,pk=pk)
-     responce=serializer.VendorSerializer(vendor,many=True)
-     
 
-     return Response(responce.data)
+class VendorViewSet(viewsets.ModelViewSet):
+    queryset = Vendor.objects.all()
+    serializer_class = VendorSerializer
+
+class PurchaseOrder(viewsets.ModelViewSet):
+    queryset = PurchaseOrder.objects.all()
+    serializer_class = PurchaseOrderSerializer
+    
+
+
+
+
+
+
 
