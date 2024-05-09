@@ -10,10 +10,10 @@ class Vendor(models.Model):
     contact_details=models.TextField()
     address=models.TextField()
     Vendor_code=models.CharField(max_length=256,unique=True)
-    on_time_delivery_rate=models.FloatField(null=True,blank=True,default=0.0)
-    quality_rating_avg=models.FloatField(null=True,blank=True,default=0.0)
-    average_response_time=models.FloatField(null=True,blank=True,default=0.0)
-    fulfillment_rate=models.FloatField(null=True,blank=True,default=0.0)
+    on_time_delivery_rate=models.FloatField(default=0.0)
+    quality_rating_avg=models.FloatField(default=0.0)
+    average_response_time=models.FloatField(default=0.0)
+    fulfillment_rate=models.FloatField(default=0.0)
 
     def __str__(self) -> str:
         return self.name
@@ -53,20 +53,24 @@ class PurchaseOrder(models.Model):
     def __str__(self) -> str:
         return self.po_number
 
+    def __init__(self,*args, **kwargs):
+        super(PurchaseOrder, self).__init__(*args, **kwargs)
+        self._previous_status = self.status
+
 
 class HistoricalPerformanceModel(models.Model):
     """
     This model stores historical data on vendor performance, enabling trend analysis.
     """
-    vendor = models.ForeignKey('Vendor', on_delete=models.CASCADE)
-    date = models.DateTimeField()
-    on_time_delivery_rate = models.FloatField()
-    quality_rating_avg = models.FloatField()
-    average_response_time = models.FloatField()
-    fulfillment_rate = models.FloatField()
+    vendor = models.ForeignKey('Vendor', on_delete=models.CASCADE, related_name='historical_performance')
+    date = models.DateTimeField(null=True, blank=True)
+    on_time_delivery_rate = models.FloatField(null=True, blank=True)
+    quality_rating_avg = models.FloatField(null=True, blank=True)
+    average_response_time = models.FloatField(null=True, blank=True)
+    fulfillment_rate = models.FloatField(null=True, blank=True)
 
     def __str__(self) -> str:
-        return self.vendor
+        return self.vendor.name
 
     
 
