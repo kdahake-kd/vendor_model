@@ -116,7 +116,7 @@
 | ---- | ----------- |
 | 204 |  |
 
-###3:&nbsp; /purchase_orders/{id}/acknowledge/
+### 3:&nbsp; /purchase_orders/{id}/acknowledge/
 
 #### POST
 ##### Description:
@@ -136,7 +136,7 @@
 | ---- | ----------- | ------ |
 | 201 |  | [PurchaseOrder](#PurchaseOrder) |
 
-###4:&nbsp; /vendors/
+### 4:&nbsp; /vendors/
 
 #### GET
 ##### Description:
@@ -171,7 +171,7 @@
 | ---- | ----------- | ------ |
 | 201 |  | [Vendor](#Vendor) |
 
-###5:&nbsp; /vendors/{id}/
+### 5:&nbsp; /vendors/{id}/
 
 #### GET
 ##### Description:
@@ -243,7 +243,7 @@
 | ---- | ----------- |
 | 204 |  |
 
-###6:&nbsp; /vendors/{id}/performance/
+### 6:&nbsp; /vendors/{id}/performance/
 
 #### GET
 ##### Description:
